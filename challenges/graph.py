@@ -20,7 +20,6 @@ class Vertex(object):
         """output the list of neighbors of this vertex"""
         return str(self.id) + " adjancent to " + str([x.id for x in self.neighbors])
 
-
     def __iter__(self):
         """iterate over the vertex objects in the
         graph, to use sytax: for v in g
@@ -39,12 +38,13 @@ class Vertex(object):
     def get_neighbors(self):
         """return the neighbors of this vertex"""
         # return the neighbors
-        if len(self.neighbors) != 0:
-            print(len(self.neighbors))
-            return self.neighbors.keys()
-        else:
-            print(self.id)
-            raise ValueError('No neighbors')
+        # if len(self.neighbors.keys()) != 0:
+        #     # print('\n')
+        return self.neighbors.keys()
+        # else:
+        #     # print(self.id)
+        #     raise ValueError('No neighbors')
+        # return  self.neighbors.keys()
 
     def get_id(self):
         """return the id of this vertex"""
@@ -70,20 +70,20 @@ class Graph:
     def __init__(self):
         """ initializes a graph object with an empty dictionary.
         """
-        self.vert_list = {}
-        # self.vert_list = []
+        self.vert_dict = {}
+        # self.vert_dict = []
         self.num_vertices = 0
 
     def __iter__(self):
         """iterate over the vertex objects in the
         graph, to use sytax: for v in g
         """
-        return iter(self.vert_list.values())
+        return iter(self.vert_dict.values())
 
     def __str__(self):
         res = ''
-        for k in self.vert_list:
-            for d in self.vert_list[str(k)]:
+        for k in self.vert_dict:
+            for d in self.vert_dict[str(k)]:
                 res = '{0}{1}->{2}\n'.format(res, k, d)
         return res[:-1]
 
@@ -96,17 +96,17 @@ class Graph:
         # create a new vertex
         vertex = Vertex(key)
         # add the new vertex to the vertex dictionary with a list as the value
-        # self.vert_list[vertex] = []
+        # self.vert_dict[vertex] = []
         # add the new vertex to the vertex list
-        self.vert_list[key] = vertex
+        self.vert_dict[key] = vertex
         # return the new vertex
         return vertex
 
     def get_vertex(self, n):
         """return the vertex if it exists"""
         # return the vertex if it is in the graph
-        if n in self.vert_list:
-            return self.vert_list[n]
+        if n in self.vert_dict:
+            return self.vert_dict[n]
         else:
             raise ValueError('Vertex not in graph')
 
@@ -115,15 +115,18 @@ class Graph:
         """
         # if either vertex is not in the graph,
         # add it - or return an error (choice is up to you).
-        if f not in self.vert_list or t not in self.vert_list:
+        if f not in self.vert_dict or t not in self.vert_dict:
             raise ValueError('vertexes not in graph')
         # if both vertices in the graph, add the
         # edge by making t a neighbor of f
         else:
-           self.vert_list[f].add_neighbor(self.vert_list[t])
+           self.vert_dict[f].add_neighbor(self.vert_dict[t], cost)
 
 
     def get_vertices(self):
         """return all the vertices in the graph"""
-        return self.vert_list.keys()
+        return str(self.vert_dict.keys())
+
+
+        # friend 1, friend 2, friend 3, friend 4, friend 5
 
