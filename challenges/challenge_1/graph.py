@@ -105,7 +105,7 @@ class Graph:
     def get_vertex(self, vertex):
         """return the vertex if it exists"""
         # return the vertex if it is in the graph
-        if n in self.vert_dict:
+        if vertex in self.vert_dict:
             return self.vert_dict[vertex]
         else:
             raise ValueError('Vertex not in graph')
