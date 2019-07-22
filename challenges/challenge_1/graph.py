@@ -3,7 +3,7 @@
 """ Vertex Class
 A helper class for the Graph class that defines vertices and vertex neighbors.
 """
-
+from queue import *
 
 class Vertex(object):
 
@@ -115,7 +115,7 @@ class Graph:
         """
         # if either vertex is not in the graph,
         # add it - or return an error (choice is up to you).
-        if f not in self.vert_dict or t not in self.vert_dict:
+        if from_vert not in self.vert_dict or to_vert not in self.vert_dict:
             raise ValueError('vertexes not in graph')
         # if both vertices in the graph, add the
         # edge by making t a neighbor of f
@@ -127,6 +127,10 @@ class Graph:
         """return all the vertices in the graph"""
         return str(self.vert_dict.keys())
 
+    def bfs(self, vert):
+        """Perform breadth first search to get the single shortest path
+        to a node in a graph """
+        queue = Queue()
 
         # friend 1, friend 2, friend 3, friend 4, friend 5
 

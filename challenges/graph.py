@@ -105,7 +105,7 @@ class Graph:
     def get_vertex(self, vertex):
         """return the vertex if it exists"""
         # return the vertex if it is in the graph
-        if n in self.vert_dict:
+        if vertex in self.vert_dict:
             return self.vert_dict[vertex]
         else:
             raise ValueError('Vertex not in graph')
@@ -115,7 +115,7 @@ class Graph:
         """
         # if either vertex is not in the graph,
         # add it - or return an error (choice is up to you).
-        if f not in self.vert_dict or t not in self.vert_dict:
+        if from_vert not in self.vert_dict or to_vert not in self.vert_dict:
             raise ValueError('vertexes not in graph')
         # if both vertices in the graph, add the
         # edge by making t a neighbor of f
