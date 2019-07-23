@@ -163,10 +163,10 @@ class Graph:
             top_vert.visited = True
             # print(top_vert.visited)
             for vert in top_vert.neighbors:
+                print(vert.distance)
                 if vert.visited == False:
                     queue.append(vert.id)
-                    # print(top_vert.id)
-                    if vert.distance > top_vert.distance + 1:
+                    if vert.distance >= top_vert.distance + 1:
                         vert.distance = top_vert.distance + 1
                         start_vert.path.append(vert.id)
         print('Path : {} {} {}'.format(vert.visited, vert.distance, start_vert.path ))
