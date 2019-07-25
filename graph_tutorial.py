@@ -15,9 +15,6 @@ class Vertex(object):
         
         """
         self.id = vertex
-        # self.visited = visited
-        # self.distance = distance
-        # self.path = []
         self.neighbors = {}
 
     def __str__(self):
@@ -44,10 +41,7 @@ class Vertex(object):
         # return the neighbors
         # if len(self.neighbors.keys()) != 0:
         #     # print('\n')
-        keys = []
-        for key in self.neighbors:
-            keys.append(key.id)
-        return keys
+        return self.neighbors.keys()
         # else:
         #     # print(self.id)
         #     raise ValueError('No neighbors')
@@ -88,8 +82,11 @@ class Graph:
         return iter(self.vert_dict.values())
 
     def __str__(self):
-      
-        return str(self.vert_dict) 
+        res = ''
+        for k in self.vert_dict:
+            for d in self.vert_dict[str(k)]:
+                res = '{0}{1}->{2}\n'.format(res, k, d)
+        return res[:-1]
 
     def add_vertex(self, key):
         """add a new vertex object to the graph with
@@ -131,47 +128,14 @@ class Graph:
         """return all the vertices in the graph"""
         return str(self.vert_dict.keys())
 
-    def bfs(self, from_vert, to_vert):
+    def bfs(self, vertex):
         """Perform breadth first search to get the single shortest path
         Between 2 nodes"""
-        visited = {}
-        num_edges = 0
-        queue = deque()
-        shortest_path = []
         # Make sure the input node is actually in the graph
-        if from_vert not in self.vert_dict or to_vert not in self.vert_dict:
+        if vertex not in self.vert_dict:
             raise KeyError("One of the verticies is not inside of the graph!")
-
-        # If they are the same vertex, the path is itself and the # of edges
-        # is 0!
-        if from_vert == to_vert:
-            return("Vertices in shortest path: {}\n Number of edges in shortest path: {} ".format(shortest_path, num_edges))
-        else:
-            queue.appendleft(from_vert)
-            visited[from_vert] = 0
-
-            while queue:
-                vert_id = queue.pop()
-                current_vert = self.get_vertex(vert_id)
-                
-                for neighbor in current_vert.get_neighbors():
-                    if neighbor in visited:
-                        continue
-                    queue.appendleft(neighbor)
-                    visited[neighbor] = current_vert.id
-                    if current_vert.id not in shortest_path:
-                        shortest_path.append(current_vert.id)
-
-            shortest_path.append(to_vert)
-
-
-            
-
-            return("Vertices in shortest path: {}\n Number of edges in shortest path: {} ".format(",".join(shortest_path), len(shortest_path) -1 ))
-
-                
-
-
+        visited = [False * len(self.vert_dict)]
+        print(visited)
 
 
             
@@ -183,8 +147,22 @@ class Graph:
 
 
 
+if __name__ == "__main__":
+    g = Graph()
+    v1 = Vertex(1)
+    v2 = Vertex(2)
+    v3 = Vertex(3)
+    v4 = Vertex(4)
+    v5 = Vertex(5)
+    vertices = [v1, v2,v3,v4,v5]
+    
+    for vertex in vertices:
+        g.add_vertex(vertex)
 
-
+    g.add_edge(v1, v2)
+    g.add_edge(v2, v3)
+    g.add_edge(v4, v5)
+    g.add_edge(v1, v4)
 
         # friend 1, friend 2, friend 3, friend 4, friend 5
 

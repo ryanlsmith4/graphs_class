@@ -26,9 +26,10 @@ def challenge_2():
         g.add_vertex(vertex)
 
     for edge in edges:
+        # print(edge)
         g.add_edge(edge[0], edge[1])
     # print('{} {}'.format(from_vert, to_vert))
-    g.bfs(from_vert, to_vert)
+    print(g.bfs(from_vert, to_vert))
 
 # if __name__ == "__main__":
 
