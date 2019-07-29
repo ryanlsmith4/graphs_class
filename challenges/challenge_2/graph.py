@@ -171,8 +171,8 @@ class Graph:
                         shortest_path.append(current_vert.id)
             # since we've reached the target add it to the list
             shortest_path.append(to_vert)
-            return(shortest_path)
-            # return("Vertices in shortest path: {}\n Number of edges in shortest path: {} ".format(",".join(shortest_path), num_edges ))
+            # return(shortest_path)
+            return("Vertices in shortest path: {}\n Number of edges in shortest path: {} ".format(",".join(shortest_path), num_edges ))
 
             
     def dfs(self, vert):
