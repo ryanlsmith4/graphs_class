@@ -211,8 +211,25 @@ class Graph:
 
 
 
-    def clique(self):
-        vert = self.get_vertex()
+    def clique(self, start_vert):
+        remaining_verts = []
+        clique = []
+        begin_vert = self.get_vertex(start_vert)
+        clique.append(begin_vert.id)
+        # Get all verts in graph
+        for vert in begin_vert.get_neighbors():
+            remaining_verts.append(vert.id)
+            for v in remaining_verts:
+                if v in vert.get_neighbors():
+                    clique.append(v)
+                else:
+                    continue
+        return clique
+
+
+
+
+        
 
 
 
@@ -248,7 +265,7 @@ if __name__ == "__main__":
     # print(g)
 
 
-    print(g.bfs(2, 2))
+    print(g.clique(2))
 
         # friend 1, friend 2, friend 3, friend 4, friend 5
 # (1,2)

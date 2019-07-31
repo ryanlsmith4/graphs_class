@@ -3,7 +3,7 @@
 """ Vertex Class
 A helper class for the Graph class that defines vertices and vertex neighbors.
 """
-from queue import *
+
 
 class Vertex(object):
 
@@ -127,36 +127,6 @@ class Graph:
         """return all the vertices in the graph"""
         return str(self.vert_dict.keys())
 
-    def bfs(self, vert, n):
-        """Perform breadth first search to get the single shortest path
-        Return all nodes found at the `n`th level
-        to a node in a graph parts of this code were contributed by Neelam yaday"""
-        # Make sure the input node is actually in the graph
-        if vert not in self.vert_dict:
-            raise ValueError('Vert not in graph')
-        # Mark all the vertices as not visited 
-        visited = [False] * (len(self.vert_dict))
-        # dictionary for keeping track of the distance from the inital vert
-        distance_dict = {}
-        # create a queue for keeping track of neighbors
-        queue = Queue()
-        queue.put(vert)
-        visited[vert] = True
-        # Run breadth_first_search starting from the input node and going `n` levels deep
-        while len(queue) <= n:
-            s = queue.get()
-            if s not in distance_dict:
-                distance_dict[s] = 1
-            else:
-                distance_dict[s] += 1
-            print(s, end=" ")
-            # get all adjacent vertices of the dequed vertex s. 
-            # if a adjacent has not been visited, then mark it visited and enque it
-            for i in vert.neighbors:
-                if visited[i] == False:
-                    queue.put(i)
-                    visited[i] = True
-        return distance_dict
 
     def dfs_util(self, vert, visited):
 
@@ -168,13 +138,13 @@ class Graph:
                 self.dfs_util(vert, visited)
 
     def dfs_recursive(self, vert):
+        if vert not in self.vert_dict:
+            print(vert)
+            raise ValueError('Vert Not in Graph')
         
         visited = [False]*(len(self.vert_dict))
 
         self.dfs_util(vert, visited)
-
-
-
 
 
         # friend 1, friend 2, friend 3, friend 4, friend 5
