@@ -138,8 +138,8 @@ class Graph:
                 self.dfs_util(vert, visited)
 
     def dfs_recursive(self, vert):
+        print(self.vert_dict)
         if vert not in self.vert_dict:
-            print(vert)
             raise ValueError('Vert Not in Graph')
         
         visited = [False]*(len(self.vert_dict))

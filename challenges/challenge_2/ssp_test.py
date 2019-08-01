@@ -19,7 +19,7 @@ class SSP_Test(unittest.TestCase):
         graph.add_edge(b, c)
         graph.add_edge(b, e)
         graph.add_edge(c, e)
-        assert graph.bfs_ssp(a, e) == [1,2,5]
+        assert graph.bfs_ssp(a, e) == [1, 2, 5]
 
 # (1,2)
 # (1,4)

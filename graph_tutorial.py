@@ -1,6 +1,7 @@
 #!python
 
 import sys
+import random
 
 
 """ Vertex Class
@@ -63,6 +64,13 @@ class Vertex(object):
             return self.neighbors[vertex]
         else:
             raise ValueError('Vertex not in Graph')
+    
+    def is_neighbor(self, vert):
+
+        if vert in self.neighbors:
+            return True
+        else:
+            return False
 
 
 """ Graph Class
@@ -125,6 +133,7 @@ class Graph:
         # edge by making t a neighbor of f
         else:
            self.vert_dict[from_vert].add_neighbor(self.vert_dict[to_vert], cost)
+           self.vert_dict[to_vert].add_neighbor(self.vert_dict[from_vert], cost)
 
 
     def get_vertices(self):
@@ -204,42 +213,30 @@ class Graph:
                         shortest_path.append(current_vert.id)
             # since we've reached the target add it to the list
             shortest_path.append(to_vert)
-            # return(shortest_path)
-            return("Vertices in shortest path: {}\n Number of edges in shortest path: {} ".format(",".join(shortest_path), num_edges ))
+            return(shortest_path)
+            # return("Vertices in shortest path: {}\n Number of edges in shortest path: {} ".format(",".join(shortest_path), num_edges ))
 
-  
-
-
-
-    def clique(self, start_vert):
-        remaining_verts = []
+    def clique(self):
+        # create needed structures and variables
+        key_list = list(self.vert_dict.values())
+        rand_choice = random.choice(key_list)
         clique = []
-        begin_vert = self.get_vertex(start_vert)
-        clique.append(begin_vert.id)
-        # Get all verts in graph
-        for vert in begin_vert.get_neighbors():
-            remaining_verts.append(vert.id)
-            for v in remaining_verts:
-                if v in vert.get_neighbors():
-                    clique.append(v)
-                else:
-                    continue
-        return clique
-
-
-
-
-        
-
+        clique.append(rand_choice)
+        # vert_neighbors = []
+        for vert in self.vert_dict.values():
+            for vert1 in clique:
+                print(vert)
+                if vert1.is_neighbor(vert):
+                    print('here')
+                    print(vert1)
+                    clique.append(vert1)
+                
+        return clique 
 
 
 if __name__ == "__main__":
     g = Graph()
-    # v1 = Vertex(1)
-    # v2 = Vertex(2)
-    # v3 = Vertex(3)
-    # v4 = Vertex(4)
-    # v5 = Vertex(5)
+
     vertices = [1,2,3,4,5]
     # print(vertices)
     
@@ -265,7 +262,7 @@ if __name__ == "__main__":
     # print(g)
 
 
-    print(g.clique(2))
+    print(g.clique())
 
         # friend 1, friend 2, friend 3, friend 4, friend 5
 # (1,2)

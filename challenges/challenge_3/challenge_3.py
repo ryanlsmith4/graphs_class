@@ -23,13 +23,13 @@ def challenge_3():
     g = Graph()
 
     for vertex in vertex_list:
-        g.add_vertex(vertex)
+        g.add_vertex(int(vertex))
 
     for edge in edges:
         # print(edge)
-        g.add_edge(edge[0], edge[1])
+        g.add_edge(int(edge[0]), int(edge[1]))
     # print('{} {}'.format(from_vert, to_vert))
-    print(g.dfs_recursive(int(from_vert)))
+    print(g.dfs_recursive(from_vert))
 
 # if __name__ == "__main__":
 
