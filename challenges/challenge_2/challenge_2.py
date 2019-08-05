@@ -29,8 +29,7 @@ def challenge_2():
         # print(edge)
         g.add_edge(edge[0], edge[1])
     # print('{} {}'.format(from_vert, to_vert))
-    print(g.bfs_ssp(from_vert, to_vert))
+    return g.bfs_ssp(from_vert, to_vert)
 
-# if __name__ == "__main__":
-
-print(challenge_2())
+if __name__ == "__main__":
+    print(challenge_2())

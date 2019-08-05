@@ -138,7 +138,6 @@ class Graph:
         visited = {}
         # store the shortest path in a list
         shortest_path = []
-        num_edges = len(shortest_path) -1
         # Use a queue for it's FIFO properties 
         queue = deque()
         # Make sure the input node is actually in the graph
@@ -156,6 +155,7 @@ class Graph:
             visited[from_vert] = 0
 
             while queue:
+                
                 # get the top of the queue
                 vert_id = queue.pop()
                 current_vert = self.get_vertex(vert_id)
@@ -174,12 +174,10 @@ class Graph:
             # print(shortest_path)
             sp_to_string = []
             for id in shortest_path:
-                sp_to_string.append(id.id)
-            return(sp_to_string)
-            # return("Vertices in shortest path: {}\n Number of edges in shortest path: {} ".format(",".join(shortest_path), num_edges ))
+                sp_to_string.append(id)
+            # return(sp_to_string)
+            num_edges = len(shortest_path) -1
+            return("Vertices in shortest path: {}\n Number of edges in shortest path: {} ".format(",".join(shortest_path), num_edges ))
 
-            
-    def dfs(self, vert):
-        pass
 
 
