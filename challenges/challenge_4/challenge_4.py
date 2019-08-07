@@ -1,4 +1,16 @@
+from functools import wraps
+def memoize(func):
+    cache = func.cache = {}
+    @wraps(func)
+    def memoized_func(*args, **kwargs):
+        key = str(args) + str(kwargs)
+        if key not in cache:
+            cache[key] = func(*args, **kwargs)
+        return cache[key]
+    return memoized_func
 
+
+@memoize
 def knapsack(max_weight, items, n):
     ''' A  method to determine the maximum value of the items included in the knapsack 
     without exceeding the capacity  C
@@ -31,6 +43,5 @@ if __name__ == "__main__":
         ("water", 30, 120),
         ("first aid", 15, 70))
     n = len(items)
-
 
     print(knapsack(max_weight, items, n))

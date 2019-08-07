@@ -28,8 +28,8 @@ def challenge_3():
     for edge in edges:
         # print(edge)
         g.add_edge(int(edge[0]), int(edge[1]))
-    print('{} {}'.format(from_vert, to_vert))
-    print(g.dfs_recursive(from_vert))
+    g.find_shortest_path(from_vert, to_vert)
+    return('{} {}'.format(from_vert, to_vert))
 
 # if __name__ == "__main__":
 

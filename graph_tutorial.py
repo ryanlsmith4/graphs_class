@@ -78,7 +78,6 @@ A class demonstrating the essential
 facts and functionalities of graphs.
 """
 
-
 class Graph:
     def __init__(self):
         """ initializes a graph object with an empty dictionary.
@@ -213,8 +212,8 @@ class Graph:
                         shortest_path.append(current_vert.id)
             # since we've reached the target add it to the list
             shortest_path.append(to_vert)
-            return(shortest_path)
-            # return("Vertices in shortest path: {}\n Number of edges in shortest path: {} ".format(",".join(shortest_path), num_edges ))
+            # return(shortest_path)
+            return("Vertices in shortest path: {}\n Number of edges in shortest path: {} ".format(",".join(shortest_path), num_edges ))
 
     def clique(self):
         # create needed structures and variables
@@ -233,18 +232,6 @@ class Graph:
                 
         return clique 
 
-    def knapsack(self,max_Weight, items, n):
-        ''' A  method to determine the maximum value of the items included in the knapsack 
-        without exceeding the capacity  C
-
-            Parameters: 
-            max_Weight = 50
-            items = (("boot", 10, 60),
-                ("tent", 20, 100),
-                ("water", 30, 120),
-                ("first aid", 15, 70))
-            Returns: max value
-        '''
 
 
 if __name__ == "__main__":

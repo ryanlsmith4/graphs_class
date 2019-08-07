@@ -3,6 +3,7 @@
 """ Vertex Class
 A helper class for the Graph class that defines vertices and vertex neighbors.
 """
+from collections import deque
 
 
 class Vertex(object):
@@ -146,6 +147,48 @@ class Graph:
 
         self.dfs_util(vert, visited)
 
+    def find_shortest_path(self, from_vert, to_vert):
+        """Perform breadth first search to get the single shortest path
+        Between 2 nodes"""
+        # dictionary for path key: vector.id | value: parent
+        visited = {}
+        # store the shortest path in a list
+        shortest_path = []
+        num_edges = len(shortest_path) -1
+        # Use a queue for it's FIFO properties 
+        queue = deque()
+        # Make sure the input node is actually in the graph
+        if from_vert not in self.vert_dict or to_vert not in self.vert_dict:
+            raise KeyError("One of the verticies is not inside of the graph!")
+
+        # BASE CASE!! If they are the same vertex, the path is itself and the # of edges
+        # is 0!
+        if from_vert == to_vert:
+            return("Vertices in shortest path: {}\n Number of edges in shortest path: {} ".format(shortest_path, num_edges))
+        else:
+            # Enter the queue before while to set end point
+            queue.appendleft(from_vert)
+            # inital value set to 0 for start point
+            visited[from_vert] = 0
+
+            while queue:
+                # get the top of the queue
+                vert_id = queue.pop()
+                current_vert = self.get_vertex(vert_id)
+                # iterate through the neighbors of the current vert
+                for neighbor in current_vert.get_neighbors():
+                    # if they have been visited continue; else do the things
+                    if neighbor in visited:
+                        continue
+                    queue.appendleft(neighbor)
+                    visited[neighbor] = current_vert.id
+                    # ensure we don't have duplicates
+                    if current_vert.id not in shortest_path:
+                        shortest_path.append(current_vert.id)
+            # since we've reached the target add it to the list
+            shortest_path.append(to_vert)
+            # return(shortest_path)
+            return("Vertices in shortest path: {}\n Number of edges in shortest path: {} ".format(shortest_path, num_edges))
+
 
         # friend 1, friend 2, friend 3, friend 4, friend 5
-
