@@ -24,7 +24,8 @@ class Vertex(object):
     def __str__(self):
         """output the list of neighbors of this vertex"""
         # return(str(self.id))
-        return str(self.id) + " adjancent to " + str([x.id for x in self.neighbors])
+        # return str(self.id) + " adjancent to " + str([x.id for x in self.neighbors])
+        return str(self.id)
 
     def __iter__(self):
         """iterate over the vertex objects in the
@@ -217,20 +218,36 @@ class Graph:
 
     def clique(self):
         # create needed structures and variables
-        key_list = list(self.vert_dict.values())
+        key_list = list(self.vert_dict.keys())
         rand_choice = random.choice(key_list)
-        clique = []
-        clique.append(rand_choice)
+        clique = set()
+        clique.add(rand_choice)
         # vert_neighbors = []
-        for vert in self.vert_dict.values():
-            for vert1 in clique:
-                print(vert)
-                if vert1.is_neighbor(vert):
-                    print('here')
-                    print(vert1)
-                    clique.append(vert1)
+        for vert in self.vert_dict:
+          
+          if vert not in clique:
+            # print("clique")
+            # print(vert)
+
+            if self.is_neighbour_of_all(vert, clique):
+              clique.add(vert)
+
                 
         return clique 
+
+    def is_neighbour_of_all(self, vertex_a, clique_set):
+      """
+          Helper function for clique, returns a bool of whether or not vertex_a
+          is a neighbour of all verticies in clique_set 
+      """
+
+      for vertex in clique_set:
+          # comparing objects
+          # print('in neighbors')
+          # print(self.vert_dict[vertex].neighbors)
+          if self.vert_dict[vertex_a] not in self.vert_dict[vertex].neighbors:
+              return False
+      return True
 
 
 
