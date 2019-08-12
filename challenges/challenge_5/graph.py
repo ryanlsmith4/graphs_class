@@ -17,6 +17,7 @@ class Vertex(object):
         self.id = vertex
         self.neighbors = {}
         self.parent = None
+        self.degree = 0
 
     def __str__(self):
         """output the list of neighbors of this vertex"""
@@ -36,6 +37,7 @@ class Vertex(object):
             raise ValueError('Vertex already a neighbor')
         # if not, add vertex to neighbors and assign weight.
         else:
+            self.degree += 1
             self.neighbors[vertex] = weight
 
     def get_neighbors(self):
@@ -47,10 +49,7 @@ class Vertex(object):
         for key in self.neighbors:
             keys.append(key.id)
         return keys
-        # else:
-        #     # print(self.id)
-        #     raise ValueError('No neighbors')
-        # return  self.neighbors.keys()
+
 
     def get_id(self):
         """return the id of this vertex"""
@@ -77,7 +76,6 @@ class Graph:
         """ initializes a graph object with an empty dictionary.
         """
         self.vert_dict = {}
-        # self.vert_dict = []
         self.num_vertices = 0
 
     def __iter__(self):
@@ -87,6 +85,7 @@ class Graph:
         return iter(self.vert_dict.values())
 
     def __str__(self):
+        '''Function for representing the graph'''
         res = ''
         for k in self.vert_dict:
             for d in self.vert_dict[str(k)]:
@@ -178,6 +177,7 @@ class Graph:
             return("Vertices in shortest path: {}\n Number of edges in shortest path: {} ".format(shortest_path, num_edges))
 
     def dfs(self, vertex, parent_reset=True):
+      '''Depth first recursiv function to solve dfs credit to ansel for looking at his code'''
       if isinstance(vertex, int):
         vertex = self.get_vertex(vertex)
 
@@ -202,6 +202,7 @@ class Graph:
               self.dfs(neighbor_key, False)
   
     def find_path(self, start_key, end_key):
+        '''Helper function to form the dfs path'''
         # get vertex objects from parameter keys
         # start_vert = self.vert_dict[start_key]
         start_vert = self.get_vertex(start_key)
@@ -218,33 +219,18 @@ class Graph:
             if parent is None:
                 return None 
             parent = parent.parent
-            # if isinstance(parent, int):
-            #     print('here')
-            #     parent = self.get_vertex(parent)
-
             path.append(parent.id)
 
         path[:] = reversed(path)
         return path
 
+    def eulerian(self):
+        '''Return weather a graph is eulerian or not This means a graph is
+         eulerian if ever vertex has a even degree'''
 
-# g = Graph()
-# # # Add your friends
-# g.add_vertex(1)
-# g.add_vertex(2)
-# g.add_vertex(3)
-# g.add_vertex(4)
-# g.add_vertex(5)
-# g.add_vertex(6)
-# # g.add_vertex(7)
-# # g.add_edge(1, 5)
-# g.add_edge(2, 3)
-# g.add_edge(3, 1)
-# g.add_edge(3, 4)
-# # g.add_edge(3, 2)
-# # g.add_edge(3, 4)
-# # g.add_edge(1, 5)
-# g.add_edge(4, 5)
-# g.add_edge(5, 6)
-# g.add_edge(6, 4)
-# print(g.find_path(1,5))
+        vertices = self.get_vertices()
+      
+        for vert in vertices:
+          if vert.degree % 2 != 0:
+            return False
+          return True

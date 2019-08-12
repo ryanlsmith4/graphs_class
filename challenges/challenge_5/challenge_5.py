@@ -1,10 +1,7 @@
-
 from graph import Graph, Vertex
 import sys
 
-def challenge_3():
-    from_vert = int(sys.argv[2])
-    to_vert = int(sys.argv[3])
+def challenge_5():
     vertex_list = []
     edges = []
     counter = 0
@@ -31,8 +28,8 @@ def challenge_3():
     # print(edges)
     # print(vertex_list)
     
-    return(g.find_path(from_vert, to_vert))
+    return(g.eulerian())
 
 # if __name__ == "__main__":
 
-print(challenge_3())
+print(challenge_5())
