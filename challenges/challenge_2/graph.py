@@ -172,20 +172,20 @@ class Graph:
             # since we've reached the target add it to the list
             shortest_path.append(to_vert)
             # print(shortest_path)
-            sp_to_string = []
-            for vert in shortest_path:
-                sp_to_string.append(vert.id)
-            # return(sp_to_string)
-            num_edges = len(shortest_path) -1
+            print(shortest_path)
+            # for vert in shortest_path:
+            #       sp_to_string.append(vert.id)
+            # # return(sp_to_string)
+            num_edges = len(shortest_path) -1 
             ##################################
             ### GRADER BEWARE ################
             ##################################
             # to pass the test must return the sp_to_string
-            return sp_to_string
+            # return sp_to_string
             ##################################
             ### TO GET OUTPUT LIKE CHALLENGE REQUIRED ####
             #### UNCOMMMENT LINE BELOW #######
-            # return("Vertices in shortest path: {}\n Number of edges in shortest path: {} ".format(",".join(shortest_path), num_edges ))
+            return("Vertices in shortest path: {}\n Number of edges in shortest path: {} ".format(",".join(shortest_path), num_edges ))
 
 
 
